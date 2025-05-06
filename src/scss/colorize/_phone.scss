@@ -1,0 +1,140 @@
+@use "sass:map";
+@use "mixins";
+
+@keyframes phone-ringing {
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+
+    10% {
+        transform: rotate(-15deg) scale(1.5);
+    }
+
+    20% {
+        transform: rotate(15deg) scale(1.5);
+    }
+
+    30% {
+        transform: rotate(-10deg) scale(1.5);
+    }
+
+    40% {
+        transform: rotate(10deg) scale(1.5);
+    }
+
+    50% {
+        transform: rotate(-5deg) scale(1.5);
+    }
+
+    60% {
+        transform: rotate(5deg) scale(1.5);
+    }
+
+    70% {
+        transform: rotate(0deg) scale(1.5);
+    }
+
+    100% {
+        transform: rotate(0deg) scale(1);
+    }
+}
+
+
+// Phone State Variables (Map of Maps)
+$phone-states: (
+    "idle" : (icon: "mdi:phone", color: var(--state-inactive-color)),
+    "ringing" : (icon: "mdi:phone-ring", color: var(--warning-color), animation: phone-ringing 1s ease-in-out infinite),
+    "offhook" : (icon: "mdi:phone-in-talk", color: var(--success-color))
+);
+
+// @each $state, $data in $phone-states {
+//     // Get properties from the map
+//     $icon: map.get($data, 'icon');
+//     $color: map.get($data, 'color');
+//     $animation: map.get($data, 'animation');
+
+//     // Apply the color 
+//     @if $icon !=null {
+//         @include mixins.apply-property($icon, $color, 'color');
+//     }
+
+//     // Apply the animation
+//     @if $animation !=null {
+//         @include mixins.apply-property($icon, $animation, 'animation', false);
+//     }
+// }
+
+
+@each $state, $data in $phone-states {
+    // Get properties from the map
+    $color: map.get($data, 'color');
+    $animation: map.get($data, 'animation');
+
+    // Apply the color based on the state
+    @if $color !=null {
+        @include mixins.apply-property(null, $color, 'color', true, "=", $state);
+    }
+
+    // Apply the animation based on the state
+    @if $animation !=null {
+        @include mixins.apply-property(null, $animation, 'animation', false, "=", $state);
+    }
+}
+
+
+
+// // Loop through each phone state
+// @each $state, $properties in $phone-state {
+//     $icon: map.get($properties, icon);
+//     $color: map.get($properties, color);
+
+//     [data-state="#{$state}"]:has(> ha-icon[icon="#{$icon}"]) {
+//         color: $color;
+//     }
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Combined Map for Phone Ringer State Variables (Icon and Color)
+$ringer-states: (
+    "silent" : (icon: "mdi:volume-off", color: var(--error-color)),
+    "vibrate" : (icon: "mdi:vibrate", color: var(--warning-color)),
+    "normal" : (icon: "mdi:volume-high", color: var(--success-color))
+);
+
+// Loop for Phone Ringer State
+// @each $state, $attributes in $ringer-states {
+//     $icon: map.get($attributes, icon);
+//     $color: map.get($attributes, color);
+
+//     [data-state="#{$state}"]:has(> ha-icon[icon="#{$icon}"]) {
+//         color: $color;
+//     }
+// }
+
+@each $state, $data in $ringer-states {
+    // Get properties from the map
+    $icon: map.get($data, 'icon');
+    $color: map.get($data, 'color');
+
+    // Apply the color based on the icon, regardless of state
+    @include mixins.apply-property($icon, $color, 'color');
+
+    // Apply the color based on the state, regardless of icon
+    @include mixins.apply-property(null, $color, 'color', true, "=", $state);
+
+}

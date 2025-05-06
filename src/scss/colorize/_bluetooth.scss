@@ -1,0 +1,9 @@
+@use "mixins";
+
+:host {
+    --bluetooth-color: var(--light-blue-color);
+}
+
+@include mixins.apply-property(("mdi:bluetooth"), var(--bluetooth-color), color, false, "^=");
+@include mixins.apply-property(("mdi:bluetooth-off"), var(--disabled-color), color);
+

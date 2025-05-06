@@ -1,0 +1,63 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build",
+            "type": "shell",
+            "command": "npm",
+            "args": [
+                "run",
+                "build"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Build & Deploy Locally",
+            "type": "npm",
+            "script": "build-deploy-locally",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "presentation": {
+                "reveal": "silent",
+                "echo": true,
+                "focus": false
+            }
+        },
+        {
+            "label": "Build Dev & Deploy Locally",
+            "type": "npm",
+            "script": "build-dev-deploy-locally",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "presentation": {
+                "reveal": "silent",
+                "echo": true,
+                "focus": false
+            }
+        },
+        {
+            "label": "Deploy Locally",
+            "type": "npm",
+            "script": "deploy-locally",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "presentation": {
+                "reveal": "silent",
+                "echo": true,
+                "focus": false
+            }
+        }
+    ]
+  }

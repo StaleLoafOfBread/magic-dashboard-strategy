@@ -1,0 +1,135 @@
+@use "sass:map";
+@use "mixins";
+@use "functions";
+
+// Define the glow levels filters
+$glow-levels: (
+    "low": drop-shadow(0 0 3px) drop-shadow(0 0 5px),
+    "medium": drop-shadow(0 0 5px) drop-shadow(0 0 7px),
+    "high": drop-shadow(0 0 5px) drop-shadow(0 0 7px) drop-shadow(0 0 10px),
+    "full": drop-shadow(0 0 5px) drop-shadow(0 0 7px) drop-shadow(0 0 10px) drop-shadow(0 0 15px)
+);
+
+
+// Define the battery states and corresponding icons and styles
+$battery-states: (
+    // Low battery
+    "low": (icons: ("mdi:battery-low",
+            "mdi:battery-charging-low",
+            "mdi:battery-outline",
+            "mdi:battery-charging-outline",
+            "mdi:battery-charging-wireless-outline",
+            "mdi:battery-10",
+            "mdi:battery-20",
+            "mdi:battery-charging-10",
+            "mdi:battery-charging-20"
+        ),
+        color: var(--state-sensor-battery-low-color),
+        filter: map.get($glow-levels, 'low')),
+
+    // Medium battery
+    "medium": (icons: ("mdi:battery-medium",
+            "mdi:battery-charging-medium",
+            "mdi:battery-30",
+            "mdi:battery-40",
+            "mdi:battery-50",
+            "mdi:battery-60",
+            "mdi:battery-charging-30",
+            "mdi:battery-charging-40",
+            "mdi:battery-charging-50",
+            "mdi:battery-charging-60",
+            "mdi:battery-charging-wireless-30",
+            "mdi:battery-charging-wireless-40",
+            "mdi:battery-charging-wireless-50",
+            "mdi:battery-charging-wireless-60"
+        ),
+        color: var(--state-sensor-battery-medium-color),
+        filter: map.get($glow-levels, 'medium')),
+
+    // High battery
+    "high": (icons: ("mdi:battery-high",
+            "mdi:battery-charging-high",
+            "mdi:battery-70",
+            "mdi:battery-80",
+            "mdi:battery-90",
+            "mdi:battery", "mdi:battery-charging-70",
+            "mdi:battery-charging-80",
+            "mdi:battery-charging-90",
+            "mdi:battery-charging-100",
+            "mdi:battery-charging",
+            "mdi:battery-charging-wireless",
+            "mdi:battery-charging-wireless-100"
+        ),
+        color: var(--state-sensor-battery-high-color),
+        filter: map.get($glow-levels, 'high')),
+
+    // Full battery
+    "full": (icons: ("mdi:battery-charging-100",
+            "mdi:battery-charging",
+            "mdi:battery-charging-wireless",
+            "mdi:battery-charging-wireless-100"
+        ),
+        color: var(--state-sensor-battery-high-color),
+        filter: map.get($glow-levels, 'full')),
+);
+
+// Set the color and filter for each battery state
+@each $state, $data in $battery-states {
+    $icons: map.get($data, 'icons');
+    $charging_icons: functions.filter-string-contains($icons, "mdi:battery-charging");
+    $color: map.get($data, 'color');
+    $filter: map.get($data, 'filter');
+    @include mixins.apply-property($icons, $color, 'color');
+    @include mixins.apply-property($charging_icons, $filter, 'filter', false);
+}
+
+
+// Define the charge time states and corresponding styles
+$charge-time-states: (
+    "nearly-full": (icons: ("mdi:battery-clock", "mdi:battery-clock-outline"),
+        color: var(--state-sensor-battery-high-color),
+        filter: map.get($glow-levels, 'full'),
+        max_minutes: 5),
+
+    "short": (icons: ("mdi:battery-clock", "mdi:battery-clock-outline"),
+        color: var(--state-sensor-battery-high-color),
+        filter: map.get($glow-levels, 'high'),
+        max_minutes: 15),
+
+    "medium": (icons: ("mdi:battery-clock", "mdi:battery-clock-outline"),
+        color: var(--state-sensor-battery-medium-color),
+        filter: map.get($glow-levels, 'medium'),
+        max_minutes: 45),
+
+    "long": (icons: ("mdi:battery-clock", "mdi:battery-clock-outline"),
+        color: var(--state-sensor-battery-low-color),
+        filter: map.get($glow-levels, 'low'))
+);
+
+// Set the color and filter for each charge time state
+$last_max_minutes: 0; // Initialize to 0, for the first loop
+
+@each $state, $data in $charge-time-states {
+    // Get properties from the map
+    $icons: map.get($data, 'icons');
+    $color: map.get($data, 'color');
+    $filter: map.get($data, 'filter');
+    $max_minutes: map.get($data, 'max_minutes');
+
+    @if $max_minutes !=null {
+
+        // Iterate over minute thresholds
+        @for $i from $last_max_minutes through $max_minutes {
+            @include mixins.apply-property($icons, $color, 'color', true, "=", $i);
+            // @include mixins.apply-property($icons, $filter, 'filter', false, "=", $i);
+        }
+
+        // Update last_max_minutes to the current state's max_minutes
+        $last_max_minutes: $max_minutes;
+    }
+
+    @else {
+        // Add a default for anything not defined. This is needed for the longest value to handle up to infinity
+        @include mixins.apply-property($icons, $color, 'color');
+    }
+}

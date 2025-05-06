@@ -1,0 +1,24 @@
+{
+    "cSpell.words": [
+        "automations",
+        "autoreset",
+        "devicetracker",
+        "entityid",
+        "hacsfiles",
+        "hass",
+        "homeassistant",
+        "litterbot",
+        "litterrobot",
+        "litterrobots",
+        "octagram",
+        "offhook",
+        "plotly",
+        "rangeselector",
+        "roborock",
+        "tickformat",
+        "xaxis"
+    ],
+    "cSpell.ignorePaths": [
+        "dist\\**",
+    ]
+}

@@ -1,0 +1,1675 @@
+/**
+ * Mixin to apply a given property/value to icon elements.
+ * Optionally includes a parent selector for extra specificity (default)
+ *
+ * @param {List} $icons - List of icon names. Ex: ("mdi:battery-low", "mdi:battery-charging-low")
+ * @param {Value} $value - The value to assign to the property. Ex:  color: var(--state-sensor-battery-low-color)
+ * @param {String} $property - The CSS property to set. Ex: 'color'
+ * @param {Boolean} $include-parent - Whether to include the parent selector. Set to false to only apply to the icon element.
+ * @param {String} $operator - The attribute operator for matching icons (default: "=" for exact match).
+ */
+:has(> ha-icon[icon="mdi:battery-low"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-low-color);
+  transition: color 0.5s;
+}
+
+ha-icon[icon="mdi:battery-low"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-low-color);
+  transition: color 0.5s;
+}
+
+:has(> ha-icon[icon="mdi:battery-charging-low"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-low-color);
+  transition: color 0.5s;
+}
+
+ha-icon[icon="mdi:battery-charging-low"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-low-color);
+  transition: color 0.5s;
+}
+
+:has(> ha-icon[icon="mdi:battery-outline"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-low-color);
+  transition: color 0.5s;
+}
+
+ha-icon[icon="mdi:battery-outline"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-low-color);
+  transition: color 0.5s;
+}
+
+:has(> ha-icon[icon="mdi:battery-charging-outline"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-low-color);
+  transition: color 0.5s;
+}
+
+ha-icon[icon="mdi:battery-charging-outline"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-low-color);
+  transition: color 0.5s;
+}
+
+:has(> ha-icon[icon="mdi:battery-charging-wireless-outline"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-low-color);
+  transition: color 0.5s;
+}
+
+ha-icon[icon="mdi:battery-charging-wireless-outline"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-low-color);
+  transition: color 0.5s;
+}
+
+:has(> ha-icon[icon="mdi:battery-10"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-low-color);
+  transition: color 0.5s;
+}
+
+ha-icon[icon="mdi:battery-10"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-low-color);
+  transition: color 0.5s;
+}
+
+:has(> ha-icon[icon="mdi:battery-20"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-low-color);
+  transition: color 0.5s;
+}
+
+ha-icon[icon="mdi:battery-20"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-low-color);
+  transition: color 0.5s;
+}
+
+:has(> ha-icon[icon="mdi:battery-charging-10"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-low-color);
+  transition: color 0.5s;
+}
+
+ha-icon[icon="mdi:battery-charging-10"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-low-color);
+  transition: color 0.5s;
+}
+
+:has(> ha-icon[icon="mdi:battery-charging-20"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-low-color);
+  transition: color 0.5s;
+}
+
+ha-icon[icon="mdi:battery-charging-20"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-low-color);
+  transition: color 0.5s;
+}
+
+ha-icon[icon="mdi:battery-charging-low"]:not(.disable-colorize) {
+  filter: drop-shadow(0 0 3px) drop-shadow(0 0 5px);
+  transition: filter 0.5s;
+}
+
+ha-icon[icon="mdi:battery-charging-outline"]:not(.disable-colorize) {
+  filter: drop-shadow(0 0 3px) drop-shadow(0 0 5px);
+  transition: filter 0.5s;
+}
+
+ha-icon[icon="mdi:battery-charging-wireless-outline"]:not(.disable-colorize) {
+  filter: drop-shadow(0 0 3px) drop-shadow(0 0 5px);
+  transition: filter 0.5s;
+}
+
+ha-icon[icon="mdi:battery-charging-10"]:not(.disable-colorize) {
+  filter: drop-shadow(0 0 3px) drop-shadow(0 0 5px);
+  transition: filter 0.5s;
+}
+
+ha-icon[icon="mdi:battery-charging-20"]:not(.disable-colorize) {
+  filter: drop-shadow(0 0 3px) drop-shadow(0 0 5px);
+  transition: filter 0.5s;
+}
+
+:has(> ha-icon[icon="mdi:battery-medium"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+ha-icon[icon="mdi:battery-medium"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+:has(> ha-icon[icon="mdi:battery-charging-medium"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+ha-icon[icon="mdi:battery-charging-medium"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+:has(> ha-icon[icon="mdi:battery-30"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+ha-icon[icon="mdi:battery-30"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+:has(> ha-icon[icon="mdi:battery-40"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+ha-icon[icon="mdi:battery-40"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+:has(> ha-icon[icon="mdi:battery-50"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+ha-icon[icon="mdi:battery-50"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+:has(> ha-icon[icon="mdi:battery-60"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+ha-icon[icon="mdi:battery-60"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+:has(> ha-icon[icon="mdi:battery-charging-30"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+ha-icon[icon="mdi:battery-charging-30"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+:has(> ha-icon[icon="mdi:battery-charging-40"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+ha-icon[icon="mdi:battery-charging-40"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+:has(> ha-icon[icon="mdi:battery-charging-50"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+ha-icon[icon="mdi:battery-charging-50"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+:has(> ha-icon[icon="mdi:battery-charging-60"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+ha-icon[icon="mdi:battery-charging-60"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+:has(> ha-icon[icon="mdi:battery-charging-wireless-30"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+ha-icon[icon="mdi:battery-charging-wireless-30"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+:has(> ha-icon[icon="mdi:battery-charging-wireless-40"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+ha-icon[icon="mdi:battery-charging-wireless-40"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+:has(> ha-icon[icon="mdi:battery-charging-wireless-50"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+ha-icon[icon="mdi:battery-charging-wireless-50"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+:has(> ha-icon[icon="mdi:battery-charging-wireless-60"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+ha-icon[icon="mdi:battery-charging-wireless-60"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+ha-icon[icon="mdi:battery-charging-medium"]:not(.disable-colorize) {
+  filter: drop-shadow(0 0 5px) drop-shadow(0 0 7px);
+  transition: filter 0.5s;
+}
+
+ha-icon[icon="mdi:battery-charging-30"]:not(.disable-colorize) {
+  filter: drop-shadow(0 0 5px) drop-shadow(0 0 7px);
+  transition: filter 0.5s;
+}
+
+ha-icon[icon="mdi:battery-charging-40"]:not(.disable-colorize) {
+  filter: drop-shadow(0 0 5px) drop-shadow(0 0 7px);
+  transition: filter 0.5s;
+}
+
+ha-icon[icon="mdi:battery-charging-50"]:not(.disable-colorize) {
+  filter: drop-shadow(0 0 5px) drop-shadow(0 0 7px);
+  transition: filter 0.5s;
+}
+
+ha-icon[icon="mdi:battery-charging-60"]:not(.disable-colorize) {
+  filter: drop-shadow(0 0 5px) drop-shadow(0 0 7px);
+  transition: filter 0.5s;
+}
+
+ha-icon[icon="mdi:battery-charging-wireless-30"]:not(.disable-colorize) {
+  filter: drop-shadow(0 0 5px) drop-shadow(0 0 7px);
+  transition: filter 0.5s;
+}
+
+ha-icon[icon="mdi:battery-charging-wireless-40"]:not(.disable-colorize) {
+  filter: drop-shadow(0 0 5px) drop-shadow(0 0 7px);
+  transition: filter 0.5s;
+}
+
+ha-icon[icon="mdi:battery-charging-wireless-50"]:not(.disable-colorize) {
+  filter: drop-shadow(0 0 5px) drop-shadow(0 0 7px);
+  transition: filter 0.5s;
+}
+
+ha-icon[icon="mdi:battery-charging-wireless-60"]:not(.disable-colorize) {
+  filter: drop-shadow(0 0 5px) drop-shadow(0 0 7px);
+  transition: filter 0.5s;
+}
+
+:has(> ha-icon[icon="mdi:battery-high"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+ha-icon[icon="mdi:battery-high"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+:has(> ha-icon[icon="mdi:battery-charging-high"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+ha-icon[icon="mdi:battery-charging-high"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+:has(> ha-icon[icon="mdi:battery-70"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+ha-icon[icon="mdi:battery-70"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+:has(> ha-icon[icon="mdi:battery-80"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+ha-icon[icon="mdi:battery-80"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+:has(> ha-icon[icon="mdi:battery-90"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+ha-icon[icon="mdi:battery-90"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+:has(> ha-icon[icon="mdi:battery"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+ha-icon[icon="mdi:battery"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+:has(> ha-icon[icon="mdi:battery-charging-70"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+ha-icon[icon="mdi:battery-charging-70"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+:has(> ha-icon[icon="mdi:battery-charging-80"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+ha-icon[icon="mdi:battery-charging-80"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+:has(> ha-icon[icon="mdi:battery-charging-90"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+ha-icon[icon="mdi:battery-charging-90"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+:has(> ha-icon[icon="mdi:battery-charging-100"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+ha-icon[icon="mdi:battery-charging-100"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+:has(> ha-icon[icon="mdi:battery-charging"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+ha-icon[icon="mdi:battery-charging"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+:has(> ha-icon[icon="mdi:battery-charging-wireless"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+ha-icon[icon="mdi:battery-charging-wireless"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+:has(> ha-icon[icon="mdi:battery-charging-wireless-100"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+ha-icon[icon="mdi:battery-charging-wireless-100"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+ha-icon[icon="mdi:battery-charging-high"]:not(.disable-colorize) {
+  filter: drop-shadow(0 0 5px) drop-shadow(0 0 7px) drop-shadow(0 0 10px);
+  transition: filter 0.5s;
+}
+
+ha-icon[icon="mdi:battery-charging-70"]:not(.disable-colorize) {
+  filter: drop-shadow(0 0 5px) drop-shadow(0 0 7px) drop-shadow(0 0 10px);
+  transition: filter 0.5s;
+}
+
+ha-icon[icon="mdi:battery-charging-80"]:not(.disable-colorize) {
+  filter: drop-shadow(0 0 5px) drop-shadow(0 0 7px) drop-shadow(0 0 10px);
+  transition: filter 0.5s;
+}
+
+ha-icon[icon="mdi:battery-charging-90"]:not(.disable-colorize) {
+  filter: drop-shadow(0 0 5px) drop-shadow(0 0 7px) drop-shadow(0 0 10px);
+  transition: filter 0.5s;
+}
+
+ha-icon[icon="mdi:battery-charging-100"]:not(.disable-colorize) {
+  filter: drop-shadow(0 0 5px) drop-shadow(0 0 7px) drop-shadow(0 0 10px);
+  transition: filter 0.5s;
+}
+
+ha-icon[icon="mdi:battery-charging"]:not(.disable-colorize) {
+  filter: drop-shadow(0 0 5px) drop-shadow(0 0 7px) drop-shadow(0 0 10px);
+  transition: filter 0.5s;
+}
+
+ha-icon[icon="mdi:battery-charging-wireless"]:not(.disable-colorize) {
+  filter: drop-shadow(0 0 5px) drop-shadow(0 0 7px) drop-shadow(0 0 10px);
+  transition: filter 0.5s;
+}
+
+ha-icon[icon="mdi:battery-charging-wireless-100"]:not(.disable-colorize) {
+  filter: drop-shadow(0 0 5px) drop-shadow(0 0 7px) drop-shadow(0 0 10px);
+  transition: filter 0.5s;
+}
+
+:has(> ha-icon[icon="mdi:battery-charging-100"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+ha-icon[icon="mdi:battery-charging-100"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+:has(> ha-icon[icon="mdi:battery-charging"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+ha-icon[icon="mdi:battery-charging"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+:has(> ha-icon[icon="mdi:battery-charging-wireless"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+ha-icon[icon="mdi:battery-charging-wireless"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+:has(> ha-icon[icon="mdi:battery-charging-wireless-100"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+ha-icon[icon="mdi:battery-charging-wireless-100"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+ha-icon[icon="mdi:battery-charging-100"]:not(.disable-colorize) {
+  filter: drop-shadow(0 0 5px) drop-shadow(0 0 7px) drop-shadow(0 0 10px) drop-shadow(0 0 15px);
+  transition: filter 0.5s;
+}
+
+ha-icon[icon="mdi:battery-charging"]:not(.disable-colorize) {
+  filter: drop-shadow(0 0 5px) drop-shadow(0 0 7px) drop-shadow(0 0 10px) drop-shadow(0 0 15px);
+  transition: filter 0.5s;
+}
+
+ha-icon[icon="mdi:battery-charging-wireless"]:not(.disable-colorize) {
+  filter: drop-shadow(0 0 5px) drop-shadow(0 0 7px) drop-shadow(0 0 10px) drop-shadow(0 0 15px);
+  transition: filter 0.5s;
+}
+
+ha-icon[icon="mdi:battery-charging-wireless-100"]:not(.disable-colorize) {
+  filter: drop-shadow(0 0 5px) drop-shadow(0 0 7px) drop-shadow(0 0 10px) drop-shadow(0 0 15px);
+  transition: filter 0.5s;
+}
+
+[data-state="0"]:has(> ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="0"] ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="0"]:has(> ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="0"] ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="1"]:has(> ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="1"] ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="1"]:has(> ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="1"] ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="2"]:has(> ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="2"] ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="2"]:has(> ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="2"] ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="3"]:has(> ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="3"] ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="3"]:has(> ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="3"] ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="4"]:has(> ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="4"] ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="4"]:has(> ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="4"] ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="5"]:has(> ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="5"] ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="5"]:has(> ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="5"] ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="5"]:has(> ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="5"] ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="5"]:has(> ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="5"] ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="6"]:has(> ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="6"] ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="6"]:has(> ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="6"] ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="7"]:has(> ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="7"] ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="7"]:has(> ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="7"] ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="8"]:has(> ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="8"] ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="8"]:has(> ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="8"] ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="9"]:has(> ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="9"] ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="9"]:has(> ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="9"] ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="10"]:has(> ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="10"] ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="10"]:has(> ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="10"] ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="11"]:has(> ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="11"] ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="11"]:has(> ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="11"] ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="12"]:has(> ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="12"] ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="12"]:has(> ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="12"] ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="13"]:has(> ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="13"] ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="13"]:has(> ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="13"] ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="14"]:has(> ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="14"] ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="14"]:has(> ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="14"] ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="15"]:has(> ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="15"] ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="15"]:has(> ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="15"] ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-high-color);
+  transition: color 0.5s;
+}
+
+[data-state="15"]:has(> ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="15"] ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="15"]:has(> ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="15"] ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="16"]:has(> ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="16"] ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="16"]:has(> ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="16"] ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="17"]:has(> ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="17"] ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="17"]:has(> ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="17"] ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="18"]:has(> ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="18"] ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="18"]:has(> ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="18"] ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="19"]:has(> ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="19"] ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="19"]:has(> ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="19"] ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="20"]:has(> ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="20"] ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="20"]:has(> ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="20"] ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="21"]:has(> ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="21"] ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="21"]:has(> ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="21"] ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="22"]:has(> ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="22"] ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="22"]:has(> ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="22"] ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="23"]:has(> ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="23"] ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="23"]:has(> ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="23"] ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="24"]:has(> ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="24"] ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="24"]:has(> ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="24"] ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="25"]:has(> ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="25"] ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="25"]:has(> ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="25"] ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="26"]:has(> ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="26"] ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="26"]:has(> ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="26"] ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="27"]:has(> ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="27"] ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="27"]:has(> ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="27"] ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="28"]:has(> ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="28"] ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="28"]:has(> ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="28"] ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="29"]:has(> ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="29"] ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="29"]:has(> ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="29"] ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="30"]:has(> ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="30"] ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="30"]:has(> ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="30"] ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="31"]:has(> ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="31"] ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="31"]:has(> ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="31"] ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="32"]:has(> ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="32"] ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="32"]:has(> ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="32"] ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="33"]:has(> ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="33"] ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="33"]:has(> ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="33"] ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="34"]:has(> ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="34"] ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="34"]:has(> ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="34"] ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="35"]:has(> ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="35"] ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="35"]:has(> ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="35"] ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="36"]:has(> ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="36"] ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="36"]:has(> ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="36"] ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="37"]:has(> ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="37"] ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="37"]:has(> ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="37"] ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="38"]:has(> ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="38"] ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="38"]:has(> ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="38"] ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="39"]:has(> ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="39"] ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="39"]:has(> ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="39"] ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="40"]:has(> ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="40"] ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="40"]:has(> ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="40"] ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="41"]:has(> ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="41"] ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="41"]:has(> ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="41"] ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="42"]:has(> ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="42"] ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="42"]:has(> ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="42"] ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="43"]:has(> ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="43"] ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="43"]:has(> ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="43"] ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="44"]:has(> ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="44"] ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="44"]:has(> ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="44"] ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="45"]:has(> ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="45"] ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="45"]:has(> ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+[data-state="45"] ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-medium-color);
+  transition: color 0.5s;
+}
+
+:has(> ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-low-color);
+  transition: color 0.5s;
+}
+
+ha-icon[icon="mdi:battery-clock"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-low-color);
+  transition: color 0.5s;
+}
+
+:has(> ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize)) {
+  color: var(--state-sensor-battery-low-color);
+  transition: color 0.5s;
+}
+
+ha-icon[icon="mdi:battery-clock-outline"]:not(.disable-colorize) {
+  color: var(--state-sensor-battery-low-color);
+  transition: color 0.5s;
+}
+
+:host {
+  --bluetooth-color: var(--light-blue-color);
+}
+
+ha-icon[icon^="mdi:bluetooth"]:not(.disable-colorize) {
+  color: var(--bluetooth-color);
+  transition: color 0.5s;
+}
+
+:has(> ha-icon[icon="mdi:bluetooth-off"]:not(.disable-colorize)) {
+  color: var(--disabled-color);
+  transition: color 0.5s;
+}
+
+ha-icon[icon="mdi:bluetooth-off"]:not(.disable-colorize) {
+  color: var(--disabled-color);
+  transition: color 0.5s;
+}
+
+@keyframes phone-ringing {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  10% {
+    transform: rotate(-15deg) scale(1.5);
+  }
+  20% {
+    transform: rotate(15deg) scale(1.5);
+  }
+  30% {
+    transform: rotate(-10deg) scale(1.5);
+  }
+  40% {
+    transform: rotate(10deg) scale(1.5);
+  }
+  50% {
+    transform: rotate(-5deg) scale(1.5);
+  }
+  60% {
+    transform: rotate(5deg) scale(1.5);
+  }
+  70% {
+    transform: rotate(0deg) scale(1.5);
+  }
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
+}
+[data-state=idle]:has(> ha-icon:not(.disable-colorize)) {
+  color: var(--state-inactive-color);
+  transition: color 0.5s;
+}
+
+[data-state=idle] ha-icon:not(.disable-colorize) {
+  color: var(--state-inactive-color);
+  transition: color 0.5s;
+}
+
+[data-state=ringing]:has(> ha-icon:not(.disable-colorize)) {
+  color: var(--warning-color);
+  transition: color 0.5s;
+}
+
+[data-state=ringing] ha-icon:not(.disable-colorize) {
+  color: var(--warning-color);
+  transition: color 0.5s;
+}
+
+[data-state=ringing] ha-icon:not(.disable-colorize) {
+  animation: phone-ringing 1s ease-in-out infinite;
+  transition: animation 0.5s;
+}
+
+[data-state=offhook]:has(> ha-icon:not(.disable-colorize)) {
+  color: var(--success-color);
+  transition: color 0.5s;
+}
+
+[data-state=offhook] ha-icon:not(.disable-colorize) {
+  color: var(--success-color);
+  transition: color 0.5s;
+}
+
+:has(> ha-icon[icon="mdi:volume-off"]:not(.disable-colorize)) {
+  color: var(--error-color);
+  transition: color 0.5s;
+}
+
+ha-icon[icon="mdi:volume-off"]:not(.disable-colorize) {
+  color: var(--error-color);
+  transition: color 0.5s;
+}
+
+[data-state=silent]:has(> ha-icon:not(.disable-colorize)) {
+  color: var(--error-color);
+  transition: color 0.5s;
+}
+
+[data-state=silent] ha-icon:not(.disable-colorize) {
+  color: var(--error-color);
+  transition: color 0.5s;
+}
+
+:has(> ha-icon[icon="mdi:vibrate"]:not(.disable-colorize)) {
+  color: var(--warning-color);
+  transition: color 0.5s;
+}
+
+ha-icon[icon="mdi:vibrate"]:not(.disable-colorize) {
+  color: var(--warning-color);
+  transition: color 0.5s;
+}
+
+[data-state=vibrate]:has(> ha-icon:not(.disable-colorize)) {
+  color: var(--warning-color);
+  transition: color 0.5s;
+}
+
+[data-state=vibrate] ha-icon:not(.disable-colorize) {
+  color: var(--warning-color);
+  transition: color 0.5s;
+}
+
+:has(> ha-icon[icon="mdi:volume-high"]:not(.disable-colorize)) {
+  color: var(--success-color);
+  transition: color 0.5s;
+}
+
+ha-icon[icon="mdi:volume-high"]:not(.disable-colorize) {
+  color: var(--success-color);
+  transition: color 0.5s;
+}
+
+[data-state=normal]:has(> ha-icon:not(.disable-colorize)) {
+  color: var(--success-color);
+  transition: color 0.5s;
+}
+
+[data-state=normal] ha-icon:not(.disable-colorize) {
+  color: var(--success-color);
+  transition: color 0.5s;
+}
+
+[data-state=on] ha-icon[icon*=light] {
+  filter: drop-shadow(0 0 3px) drop-shadow(0 0 5px) drop-shadow(0 0 25px) drop-shadow(0 0 50px);
+}
+
+/* Errors */
+[data-state]:not([data-state=off]):not([data-state=idle]):not([data-state=ok]):not([data-state=normal]):has(> ha-icon[icon="mdi:minus-circle"]) {
+  color: var(--error-color);
+}
+
+[data-entity$=_error]:not([data-state=off]):not([data-state=idle]):not([data-state=ok]):not([data-state=normal]) {
+  color: var(--error-color);
+}

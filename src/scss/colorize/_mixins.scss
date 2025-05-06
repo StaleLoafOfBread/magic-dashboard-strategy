@@ -1,0 +1,56 @@
+/**
+ * Mixin to apply a given property/value to icon elements.
+ * Optionally includes a parent selector for extra specificity (default)
+ *
+ * @param {List} $icons - List of icon names. Ex: ("mdi:battery-low", "mdi:battery-charging-low")
+ * @param {Value} $value - The value to assign to the property. Ex:  color: var(--state-sensor-battery-low-color)
+ * @param {String} $property - The CSS property to set. Ex: 'color'
+ * @param {Boolean} $include-parent - Whether to include the parent selector. Set to false to only apply to the icon element.
+ * @param {String} $operator - The attribute operator for matching icons (default: "=" for exact match).
+ */
+// @mixin apply-property($icons, $value, $property, $include-parent: true, $operator: "=") {
+//     @each $icon in $icons {
+//         $attr-selector: "[icon#{$operator}\"#{$icon}\"]";
+
+//         @if $include-parent {
+
+//             div:has(> #{$attr-selector}:not(.disable-colorize)),
+//             ha-icon#{$attr-selector}:not(.disable-colorize) {
+//                 #{$property}: $value;
+//             }
+//         }
+
+//         @else {
+//             ha-icon#{$attr-selector}:not(.disable-colorize) {
+//                 #{$property}: $value;
+//             }
+//         }
+//     }
+// }
+
+
+@mixin apply-property($icons: null, $value, $property, $include-parent: true, $operator: "=", $state: null, $transition-time: 0.5s) {
+    // If $icons is not provided, apply to all icons
+    $icons: if($icons !=null, $icons, ("*"));
+
+    @each $icon in $icons {
+        $icon-selector: if($icon !="*", "[icon#{$operator}\"#{$icon}\"]", ""); // If specific icon is not provided, use [icon]
+        $data-state-selector: if($state !=null, "[data-state=\"#{$state}\"]", ""); // Make data-state optional
+
+        @if $include-parent {
+
+            // Apply property to the direct parent
+            #{$data-state-selector}:has(> ha-icon#{$icon-selector}:not(.disable-colorize)) {
+                #{$property}: $value;
+                transition: #{$property} #{$transition-time};
+
+            }
+        }
+
+        // Apply property to the icon itself, even if we also did it to the parent
+        #{$data-state-selector} ha-icon#{$icon-selector}:not(.disable-colorize) {
+            #{$property}: $value;
+            transition: #{$property} #{$transition-time}; // Apply transition for the property
+        }
+    }
+}

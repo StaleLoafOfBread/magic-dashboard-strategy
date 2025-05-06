@@ -1,0 +1,15 @@
+@use "sass:string";
+@use "sass:list";
+
+@function filter-string-contains($list-of-strings, $string-to-match) {
+    $filtered-list: (
+    ); 
+    
+@each $item in $list-of-strings {
+    @if string.index($item, $string-to-match)==1 {
+        $filtered-list: list.append($filtered-list, $item);
+    }
+}
+
+@return $filtered-list;
+}
