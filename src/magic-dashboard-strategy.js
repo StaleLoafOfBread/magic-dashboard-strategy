@@ -260,9 +260,8 @@ class ErrorView {
     return {
       type: "sections",
       max_columns: 4,
-      //badges,//: [helpers.alertBadge()], // For some reason badges just aren't being applied for this view
+      badges: [helpers.alertBadge()],
       sections: [
-        helpers.alertBadge(),
         {
           type: "grid",
           cards: [
@@ -462,7 +461,6 @@ class ErrorView {
         },
       ],
       dense_section_placement: true,
-      badges: [],
     };
   }
 }
