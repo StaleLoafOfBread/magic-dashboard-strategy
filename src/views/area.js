@@ -1870,6 +1870,19 @@ function climate_control_grid(mergedEntityMetadata, area) {
   cards.push(humidityCard(mergedEntityMetadata, area));
   cards.push(carbonDioxideCard(mergedEntityMetadata, area));
 
+  // Get all the climate entities
+  const climate_entities = helpers.filterEntitiesByProperties(
+    mergedEntityMetadata,
+    {
+      domain: "climate",
+      area_id: area.area_id,
+    }
+  );
+  // Create a card for each climate entity
+  climate_entities.forEach((climate_entity) => {
+    cards.push(new_bubble_climate_card(climate_entity.entity_id));
+  });
+
   // Remove null cards
   cards = cards.filter((x) => x !== null);
 
@@ -1879,6 +1892,58 @@ function climate_control_grid(mergedEntityMetadata, area) {
   }
 
   return helpers.newGrid(cards);
+}
+
+function new_bubble_climate_card(entity_id) {
+  return {
+    type: "custom:bubble-card",
+    card_type: "climate",
+    modules: helpers.BUBBLE_MODULES,
+    entity: entity_id,
+    sub_button: [
+      {
+        name: "HVAC modes menu",
+        select_attribute: "hvac_modes",
+        state_background: true,
+        show_background: true,
+        show_arrow: false,
+        show_attribute: false,
+      },
+      {
+        name: "Presets",
+        select_attribute: "preset_modes",
+        state_background: true,
+        show_background: true,
+        show_arrow: false,
+        show_name: false,
+        show_state: false,
+        show_attribute: false,
+        attribute: "preset_mode",
+      },
+      {
+        entity: entity_id,
+        name: "Current Temperature",
+        icon: "mdi:thermometer",
+        state_background: true,
+        show_background: true,
+        show_attribute: true,
+        attribute: "current_temperature",
+      },
+    ],
+    force_icon: false,
+    show_name: false,
+    show_state: false,
+    show_last_changed: false,
+    show_attribute: false,
+    attribute: "hvac_action",
+    rows: "1",
+    card_layout: "large",
+    show_last_updated: false,
+    show_icon: true,
+    scrolling_effect: true,
+    styles:
+      ".bubble-temperature-container { background-color: ${state !== 'off' ? 'var(--bubble-accent-color, var(--bubble-default-color))' : 'var(--bubble-climate-button-background-color, var(--bubble-secondary-background-color, var(--card-background-color, var(--ha-card-background))))'};}",
+  };
 }
 
 customElements.define("ll-strategy-view-magic-area", AreaView);
