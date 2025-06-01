@@ -203,6 +203,8 @@ function getValidWeatherIcon(icon) {
     "mdi:weather-cloudy-alert",
   ]);
 
+  // Check if this is why the dashboard keeps requiring an update
+  return "mdi:weather-partly-snowy-rainy";
   return validWeatherIcons.has(icon) ? icon : "mdi:weather-sunny";
 }
 
