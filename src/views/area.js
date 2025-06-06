@@ -1369,103 +1369,103 @@ function vacuumCards(entities) {
   return cards;
 }
 
-function AutomationGrid(entities) {
-  function card(entity) {
-    const toggle = {
-      action: "toggle",
-      confirmation: {
-        text: `This will toggle automation '${entity.attributes.friendly_name}'.`,
-      },
-    };
+function new_bubble_card_automation(entity) {
+  const toggle = {
+    action: "toggle",
+    confirmation: {
+      text: `This will toggle automation '${entity.attributes.friendly_name}'.`,
+    },
+  };
 
-    // TODO: Replace buttons with a hamburger menu that opens a popup with the buttons
-    return {
-      type: "custom:bubble-card",
-      card_type: "button",
-      modules: helpers.BUBBLE_MODULES,
-      entity: entity.entity_id,
-      sub_button: [
-        {
-          entity: entity.entity_id,
-          show_name: false,
-          name: "Trigger",
-          icon: "mdi:play",
-          show_state: false,
-          state_background: false,
-          tap_action: {
-            action: "call-service",
-            target: {
-              entity_id: "entity",
-            },
-            data: {
-              skip_condition: false,
-            },
-            service: "automation.trigger",
-            confirmation: {
-              text: `This will run automation '${entity.attributes.friendly_name}'.`,
-            },
+  // TODO: Replace buttons with a hamburger menu that opens a popup with the buttons
+  return {
+    type: "custom:bubble-card",
+    card_type: "button",
+    modules: helpers.BUBBLE_MODULES,
+    entity: entity.entity_id,
+    sub_button: [
+      {
+        entity: entity.entity_id,
+        show_name: false,
+        name: "Trigger",
+        icon: "mdi:play",
+        show_state: false,
+        state_background: false,
+        tap_action: {
+          action: "call-service",
+          target: {
+            entity_id: "entity",
           },
-          show_last_updated: false,
-          show_last_changed: false,
-          show_attribute: false,
-          attribute: "icon",
+          data: {
+            skip_condition: false,
+          },
+          service: "automation.trigger",
+          confirmation: {
+            text: `This will run automation '${entity.attributes.friendly_name}'.`,
+          },
         },
-        // {
-        //   entity: entity.entity_id,
-        //   show_name: false,
-        //   name: "Force Trigger",
-        //   icon: "mdi:flash",
-        //   show_state: false,
-        //   state_background: false,
-        //   tap_action: {
-        //     action: "call-service",
-        //     target: {
-        //       entity_id: "entity",
-        //     },
-        //     data: {
-        //       skip_condition: true,
-        //     },
-        //     service: "automation.trigger",
-        //     confirmation: {
-        //       text: `This will run automation '${entity.attributes.friendly_name}' regardless of current conditions.`,
-        //     },
-        //   },
-        //   show_last_updated: false,
-        //   show_last_changed: false,
-        //   show_attribute: false,
-        //   attribute: "icon",
-        // },
-        {
-          entity: entity.entity_id,
-          show_name: false,
-          name: "Toggle Button",
-          icon: "mdi:power",
-          state_background: false,
-          show_state: true,
-          tap_action: toggle,
-          show_last_updated: false,
-          show_last_changed: false,
-        },
-      ],
-      card_layout: "large",
-      styles: ".bubble-button-background {opacity: 0 !important;}",
-      show_attribute: true,
-      show_last_updated: false,
-      show_last_changed: false,
-      tap_action: toggle,
-      attribute: "last_triggered",
-      button_action: {
+        show_last_updated: false,
+        show_last_changed: false,
+        show_attribute: false,
+        attribute: "icon",
+      },
+      // {
+      //   entity: entity.entity_id,
+      //   show_name: false,
+      //   name: "Force Trigger",
+      //   icon: "mdi:flash",
+      //   show_state: false,
+      //   state_background: false,
+      //   tap_action: {
+      //     action: "call-service",
+      //     target: {
+      //       entity_id: "entity",
+      //     },
+      //     data: {
+      //       skip_condition: true,
+      //     },
+      //     service: "automation.trigger",
+      //     confirmation: {
+      //       text: `This will run automation '${entity.attributes.friendly_name}' regardless of current conditions.`,
+      //     },
+      //   },
+      //   show_last_updated: false,
+      //   show_last_changed: false,
+      //   show_attribute: false,
+      //   attribute: "icon",
+      // },
+      {
+        entity: entity.entity_id,
+        show_name: false,
+        name: "Toggle Button",
+        icon: "mdi:power",
+        state_background: false,
+        show_state: true,
         tap_action: toggle,
+        show_last_updated: false,
+        show_last_changed: false,
       },
-      double_tap_action: {
-        action: "none",
-      },
-      hold_action: {
-        action: "none",
-      },
-    };
-  }
+    ],
+    card_layout: "large",
+    styles: ".bubble-button-background {opacity: 0 !important;}",
+    show_attribute: true,
+    show_last_updated: false,
+    show_last_changed: false,
+    tap_action: toggle,
+    attribute: "last_triggered",
+    button_action: {
+      tap_action: toggle,
+    },
+    double_tap_action: {
+      action: "none",
+    },
+    hold_action: {
+      action: "none",
+    },
+  };
+}
 
+function AutomationGrid(entities) {
   const automations = helpers
     .filterEntitiesByProperties(entities, {
       domain: "automation",
@@ -1478,7 +1478,9 @@ function AutomationGrid(entities) {
     });
 
   // Create a card for each automation
-  const cards = automations.map((automation) => card(automation));
+  const cards = automations.map((automation) =>
+    new_bubble_card_automation(automation)
+  );
 
   // Return null if we have no cards
   if (cards.length === 0) {
@@ -1870,7 +1872,7 @@ function climate_control_grid(mergedEntityMetadata, area) {
   cards.push(humidityCard(mergedEntityMetadata, area));
   cards.push(carbonDioxideCard(mergedEntityMetadata, area));
 
-  // Get all the climate entities
+  // Get all climate entities (domain: "climate")
   const climate_entities = helpers.filterEntitiesByProperties(
     mergedEntityMetadata,
     {
@@ -1878,9 +1880,25 @@ function climate_control_grid(mergedEntityMetadata, area) {
       area_id: area.area_id,
     }
   );
-  // Create a card for each climate entity
-  climate_entities.forEach((climate_entity) => {
-    cards.push(new_bubble_climate_card(climate_entity.entity_id));
+
+  // Get all entities tagged with "climate"
+  const climate_entities_tagged = helpers
+    .filterEntitiesByProperties(mergedEntityMetadata, {
+      area_id: area.area_id,
+    })
+    .filter((x) => x.labels?.includes("climate"));
+
+  // Merge and deduplicate entities based on entity_id
+  const combined_climate_entities = helpers.remove_hidden(
+    [...climate_entities, ...climate_entities_tagged].filter(
+      (entity, index, self) =>
+        index === self.findIndex((e) => e.entity_id === entity.entity_id)
+    )
+  );
+
+  // Create a card for each unique climate entity
+  combined_climate_entities.forEach((entity) => {
+    cards.push(new_bubble_card(entity));
   });
 
   // Remove null cards
@@ -1943,6 +1961,128 @@ function new_bubble_climate_card(entity_id) {
     scrolling_effect: true,
     styles:
       ".bubble-temperature-container { background-color: ${state !== 'off' ? 'var(--bubble-accent-color, var(--bubble-default-color))' : 'var(--bubble-climate-button-background-color, var(--bubble-secondary-background-color, var(--card-background-color, var(--ha-card-background))))'};}",
+  };
+}
+
+function new_bubble_card(entity) {
+  if (entity === undefined) {
+    return null;
+  }
+
+  if (entity.domain == "climate") {
+    return new_bubble_climate_card(entity.entity_id);
+  }
+
+  if (entity.domain == "timer") {
+    return new_bubble_timer_card(entity);
+  }
+
+  if (entity.domain == "binary_sensor") {
+    return new_bubble_card_binary_sensor(entity);
+  }
+
+  if (entity.domain == "automation") {
+    return new_bubble_card_automation(entity);
+  }
+
+  // TODO: support all domains
+  return new_generic_bubble_card(entity);
+}
+
+function new_bubble_card_binary_sensor(entity) {
+  let card = new_generic_bubble_card(entity);
+
+  // Only show problem cards while there's a problem
+  if (entity.attributes?.device_class === "problem") {
+    card.visibility.push({
+      condition: "state",
+      entity: entity.entity_id,
+      state: "on",
+    });
+  }
+
+  return card;
+}
+
+function new_generic_bubble_card(entity) {
+  return {
+    type: "custom:bubble-card",
+    card_type: "button",
+    modules: helpers.BUBBLE_MODULES,
+    entity: entity.entity_id,
+    button_type: "state",
+    show_state: true,
+    show_last_changed: true,
+    show_attribute: false,
+    visibility: [],
+  };
+}
+
+function new_bubble_timer_card(entity) {
+  // TODO: Switch to something better like https://github.com/Clooos/Bubble-Card/discussions/937
+
+  return {
+    type: "custom:bubble-card",
+    card_type: "button",
+    button_type: "state",
+    entity: entity.entity_id,
+    show_attribute: false,
+    sub_button: [
+      {
+        entity: entity.entity_id,
+        show_attribute: true,
+        attribute: "finishes_at",
+        visibility: [
+          {
+            condition: "state",
+            entity: entity.entity_id,
+            state: "active",
+          },
+        ],
+        show_icon: false,
+      },
+      {
+        entity: entity.entity_id,
+        tap_action: {
+          action: "call-service",
+          target: {
+            entity_id: "entity",
+          },
+          service: "timer.start",
+        },
+        icon: "mdi:play",
+        visibility: [
+          {
+            condition: "state",
+            entity: entity.entity_id,
+            state_not: "active",
+          },
+        ],
+        name: "Start",
+      },
+      {
+        entity: entity.entity_id,
+        tap_action: {
+          action: "call-service",
+          target: {
+            entity_id: "entity",
+          },
+          service: "timer.pause",
+        },
+        icon: "mdi:pause",
+        visibility: [
+          {
+            condition: "state",
+            entity: entity.entity_id,
+            state: "active",
+          },
+        ],
+        name: "Pause",
+      },
+    ],
+    show_state: true,
+    attribute: "finishes_at",
+    show_last_changed: true,
   };
 }
 
