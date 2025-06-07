@@ -54,6 +54,9 @@ class AreaView {
     // Automations Grid
     sections.push(AutomationGrid(thisAreasEntities));
 
+    // Scripts Grid
+    sections.push(ScriptGrid(thisAreasEntities));
+
     // Add card mod
     helpers.AddCardMod(sections);
 
@@ -1465,12 +1468,37 @@ function new_bubble_card_automation(entity) {
   };
 }
 
+function ScriptGrid(entities) {
+  const scripts = helpers
+    .filterEntitiesByProperties(entities, {
+      domain: "script",
+    })
+    .sort((a, b) => {
+      const nameA = a.attributes?.friendly_name?.toLowerCase() || "";
+      const nameB = b.attributes?.friendly_name?.toLowerCase() || "";
+      return nameA.localeCompare(nameB);
+    });
+
+  // Create a card for each script
+  const cards = scripts.map((script) => new_bubble_card(script));
+
+  // Return null if we have no cards
+  if (cards.length === 0) {
+    return null;
+  }
+
+  // Add the header
+  cards.unshift(sectionHeader("mdi:script-text", "Scripts"));
+
+  // Create grid to store the cards in
+  return helpers.newGrid(cards);
+}
+
 function AutomationGrid(entities) {
   const automations = helpers
     .filterEntitiesByProperties(entities, {
       domain: "automation",
     })
-    .filter((x) => !x.entity_id.startsWith("automation.magic_areas_light_"))
     .sort((a, b) => {
       const nameA = a.attributes?.friendly_name?.toLowerCase() || "";
       const nameB = b.attributes?.friendly_name?.toLowerCase() || "";
