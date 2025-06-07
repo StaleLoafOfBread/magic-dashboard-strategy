@@ -1999,6 +1999,7 @@ function new_bubble_card_binary_sensor(entity) {
       entity: entity.entity_id,
       state: "on",
     });
+    card.modules.push("colorize", "animate");
   }
 
   return card;
@@ -2014,6 +2015,15 @@ function new_generic_bubble_card(entity) {
     show_state: true,
     show_last_changed: true,
     show_attribute: false,
+    // Subbutton looks better on normal screen but smaller screens it looks worse
+    // TODO: custom style to adjust on screen size
+    // sub_button: [
+    //   {
+    //     entity: entity.entity_id,
+    //     show_state: true,
+    //     name: "State",
+    //   },
+    // ],
     visibility: [],
   };
 }

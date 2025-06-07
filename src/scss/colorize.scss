@@ -2,14 +2,4 @@
 @use 'colorize/bluetooth';
 @use 'colorize/phone';
 @use 'colorize/light';
-
-
-
-/* Errors */
-[data-state]:not([data-state="off"]):not([data-state="idle"]):not([data-state="ok"]):not([data-state="normal"]):has(> ha-icon[icon="mdi:minus-circle"]) {
-    color: var(--error-color);
-}
-
-[data-entity$="_error"]:not([data-state="off"]):not([data-state="idle"]):not([data-state="ok"]):not([data-state="normal"]) {
-    color: var(--error-color);
-}
+@use 'colorize/error';

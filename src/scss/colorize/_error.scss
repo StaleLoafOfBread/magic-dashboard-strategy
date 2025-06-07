@@ -1,0 +1,16 @@
+// Make cards with an error state glow red
+ha-card:has([data-device_class="problem"][data-state="on"]) {
+    --glow-color: var(--error-color);
+    animation: breathing-glow-alt 3s infinite;
+}
+
+
+/* Errors */
+// Not sure if these are doing anything. Commenting out to see if anything breaks
+// [data-state]:not([data-state="off"]):not([data-state="idle"]):not([data-state="ok"]):not([data-state="normal"]):has(> ha-icon[icon="mdi:minus-circle"]) {
+//     color: var(--error-color);
+// }
+
+// [data-entity$="_error"]:not([data-state="off"]):not([data-state="idle"]):not([data-state="ok"]):not([data-state="normal"]) {
+//     color: var(--error-color);
+// }
