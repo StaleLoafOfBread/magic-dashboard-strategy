@@ -1454,10 +1454,14 @@ function new_bubble_card_automation(entity) {
     show_attribute: true,
     show_last_updated: false,
     show_last_changed: false,
-    tap_action: toggle,
     attribute: "last_triggered",
+    tap_action: {
+      action: "more-info",
+    },
     button_action: {
-      tap_action: toggle,
+      tap_action: {
+        action: "more-info",
+      },
     },
     double_tap_action: {
       action: "none",
