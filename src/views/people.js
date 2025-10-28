@@ -72,17 +72,26 @@ function headerCard2(person, entities) {
   }
 
   // TODO: be smarter about what device tracker we consider their phone
-  // For now we just assume it exists and that its the first device tracker listed
-  // We should instead parse them all, looking for one that is from the right platform/integration
-  // Then maybe return multiple cards for all phones we find
-  const phone_entity_id = person.attributes.device_trackers[0];
-  const phone_device_id = entities[phone_entity_id].device_id;
+  // For now we try to use the first device tracker listed but guard if missing
+  const phone_entity_id =
+    person.attributes &&
+    Array.isArray(person.attributes.device_trackers) &&
+    person.attributes.device_trackers.length > 0
+      ? person.attributes.device_trackers[0]
+      : undefined;
+
+  const phone_device_id =
+    phone_entity_id && entities[phone_entity_id]
+      ? entities[phone_entity_id].device_id
+      : undefined;
   const phone_sensor_prefix = phone_entity_id.split(".")[1];
   const ble_sensor = `sensor.${phone_sensor_prefix}_ble_transmitter`;
   let ble_idx = undefined;
   let ble_area_sensor = undefined;
 
+  // Get the Bluetooth Low Energy (BLE) area sensor from Bermuda
   if (
+    phone_entity_id &&
     entities[ble_sensor] &&
     entities[ble_sensor].attributes &&
     entities[ble_sensor].attributes.id
@@ -96,11 +105,18 @@ function headerCard2(person, entities) {
       unique_id: `${ble_uuid}_area_last_seen`,
     });
     console.log(ble_area_sensor);
+  } else {
+    console.warn(
+      "BLE sensor or phone entity ID not found for person:",
+      person.entity_id
+    );
   }
 
-  const visible_when_ble_bad = helpers.visibilityIsUnknownUnavailable(
-    ble_area_sensor[0].entity_id // TODO: clean up so we aren't dealing with ble_area_sensor as an array
-  );
+  // Ensure ble_area_sensor is an array with at least one element before trying to access it
+  const visible_when_ble_bad =
+    Array.isArray(ble_area_sensor) && ble_area_sensor.length > 0
+      ? helpers.visibilityIsUnknownUnavailable(ble_area_sensor[0].entity_id)
+      : helpers.visibilityIsUnknownUnavailable(person.entity_id);
   visible_when_ble_bad["conditions"].push({
     condition: "state",
     entity: ble_sensor,
@@ -113,11 +129,12 @@ function headerCard2(person, entities) {
   // place entity
   // Link to the map
   // From there the user can click on any of them to open the more info dialog
+  const _location_matches = helpers.filterEntitiesByProperties(entities, {
+    platform: "places",
+    "attributes.devicetracker_entityid": person.entity_id,
+  });
   const location =
-    helpers.filterEntitiesByProperties(entities, {
-      platform: "places",
-      "attributes.devicetracker_entityid": person.entity_id,
-    })[0] ?? person;
+    _location_matches && _location_matches[0] ? _location_matches[0] : person;
   sub_button.push({
     entity: location.entity_id,
     name: "Location",
@@ -131,7 +148,7 @@ function headerCard2(person, entities) {
   });
 
   // TODO: check if this still works for when ble_area_sensor is undefined
-  if (ble_area_sensor.length > 0) {
+  if (Array.isArray(ble_area_sensor) && ble_area_sensor.length > 0) {
     ble_area_sensor = ble_area_sensor[0];
     console.log(ble_area_sensor.entity_id);
     sub_button.push({
@@ -156,16 +173,18 @@ function headerCard2(person, entities) {
     ble_idx = sub_button.length - 1;
   }
 
-  // Add a link to the underlying phone device
+  // Add a link to the underlying phone device (if we have a device id)
   sub_button.push({
     name: "Phone Link",
     icon: "mdi:information-variant-circle-outline",
     state_background: false,
     show_background: false,
-    tap_action: {
-      action: "navigate",
-      navigation_path: `/config/devices/device/${phone_device_id}`,
-    },
+    tap_action: phone_device_id
+      ? {
+          action: "navigate",
+          navigation_path: `/config/devices/device/${phone_device_id}`,
+        }
+      : undefined,
   });
 
   const bubble_icon = {
