@@ -1,8 +1,13 @@
+@use "mixins";
+
 // Make cards with an error state glow red
 ha-card:has([data-device_class="problem"][data-state="on"]) {
     --glow-color: var(--error-color);
     animation: breathing-glow-alt 3s infinite;
 }
+
+// mdi:minus-circle usually indicates an error state
+@include mixins.apply-property(("mdi:minus-circle"), var(--error-color), color);
 
 
 /* Errors */

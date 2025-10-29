@@ -1670,4 +1670,14 @@ ha-card:has([data-device_class=problem][data-state=on]) {
   animation: breathing-glow-alt 3s infinite;
 }
 
+:has(> ha-icon[icon="mdi:minus-circle"]:not(.disable-colorize)) {
+  color: var(--error-color);
+  transition: color 0.5s;
+}
+
+ha-icon[icon="mdi:minus-circle"]:not(.disable-colorize) {
+  color: var(--error-color);
+  transition: color 0.5s;
+}
+
 /* Errors */
