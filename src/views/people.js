@@ -49,7 +49,7 @@ const SPACER_CARD = {
 function headerCard2(person, entities) {
   const sub_button = [];
 
-  const time_to_home = `sensor.${person.attributes.id}_to_home`; // TODO: actually check that it exists
+  const time_to_home = `sensor.${person.attributes.id}_to_home`;
   if (time_to_home in entities) {
     sub_button.push({
       entity: time_to_home,
@@ -174,18 +174,18 @@ function headerCard2(person, entities) {
   }
 
   // Add a link to the underlying phone device (if we have a device id)
-  sub_button.push({
-    name: "Phone Link",
-    icon: "mdi:information-variant-circle-outline",
-    state_background: false,
-    show_background: false,
-    tap_action: phone_device_id
-      ? {
-          action: "navigate",
-          navigation_path: `/config/devices/device/${phone_device_id}`,
-        }
-      : undefined,
-  });
+  if (phone_device_id) {
+    sub_button.push({
+      name: "Phone Link",
+      icon: "mdi:information-variant-circle-outline",
+      state_background: false,
+      show_background: false,
+      tap_action: {
+        action: "navigate",
+        navigation_path: `/config/devices/device/${phone_device_id}`,
+      },
+    });
+  }
 
   const bubble_icon = {
     "background-image": `url("${person.attributes.entity_picture}")`,
@@ -385,25 +385,44 @@ function phoneCard(person, entities) {
   const sleep_confidence_visible_threshold = 80; // 90 = visible if sleep confidence is at least 90%
   const sleep_confidence_color = "var(--purple-color)"; // Color of the sleep confidence icon
 
-  // TODO: Exit if no subbuttons exist
-
-  const show_background = true;
-  const state_background = false;
-
   // Subbuttons
-  // TODO: Only add subbutton if the entity exists
   const sub_button = [];
 
-  // Add sleep sensor
-  sub_button.push({
-    entity: sleep_confidence_sensor,
-    name: "Sleep Confidence",
-    show_background,
-    state_background,
+  // Helpers
+  const isValidEntity = (entity) => {
+    if (!entity) return false;
+    const ent = entities[entity];
+    return (
+      ent &&
+      (ent.disabled_by === undefined ||
+        ent.disabled_by === null ||
+        ent.disabled_by === "")
+    );
+  };
+
+  const phoneSensorEntityID = (domain, key) =>
+    `${domain}.${phone_sensor_prefix}_${key}`;
+
+  const COMMON = {
+    show_background: true,
+    state_background: false,
     show_icon: true,
     show_state: false,
     show_attribute: false,
     show_name: false,
+  };
+
+  const addSubButton = (config) => {
+    if (!isValidEntity(config.entity)) return null;
+    sub_button.push(config);
+    return sub_button.length - 1;
+  };
+
+  // Sleep Confidence
+  const SLEEP_CONFIDENCE_IDX = addSubButton({
+    ...COMMON,
+    entity: sleep_confidence_sensor,
+    name: "Sleep Confidence",
     visibility: [
       {
         condition: "numeric_state",
@@ -412,103 +431,85 @@ function phoneCard(person, entities) {
       },
     ],
   });
-  const SLEEP_CONFIDENCE_IDX = sub_button.length - 1;
 
-  sub_button.push({
-    entity: `binary_sensor.${phone_sensor_prefix}_interactive`,
+  // Interactive
+  const INTERACTIVE_IDX = addSubButton({
+    ...COMMON,
+    entity: phoneSensorEntityID("binary_sensor", "interactive"),
     name: "Interactive",
-    show_background,
-    state_background,
-    show_icon: true,
-    show_state: false,
     visibility: [
       {
         condition: "state",
-        entity: `binary_sensor.${phone_sensor_prefix}_interactive`,
+        entity: phoneSensorEntityID("binary_sensor", "interactive"),
         state_not: "off",
       },
     ],
   });
-  const INTERACTIVE_IDX = sub_button.length - 1;
-  sub_button.push({
-    entity: `sensor.${phone_sensor_prefix}_do_not_disturb_sensor`,
+
+  // Do Not Disturb
+  const DND_IDX = addSubButton({
+    ...COMMON,
+    entity: phoneSensorEntityID("sensor", "do_not_disturb_sensor"),
     name: "Do Not Disturb",
-    show_background,
-    state_background,
-    show_icon: true,
-    show_state: false,
     visibility: [
       {
         condition: "state",
-        entity: `sensor.${phone_sensor_prefix}_do_not_disturb_sensor`,
+        entity: phoneSensorEntityID("sensor", "do_not_disturb_sensor"),
         state_not: "off",
       },
     ],
     show_last_changed: false,
   });
-  const DND_IDX = sub_button.length - 1;
-  sub_button.push({
-    entity: `sensor.${phone_sensor_prefix}_ringer_mode`,
+
+  // Ringer Mode
+  const RINGER_MODE_IDX = addSubButton({
+    ...COMMON,
+    entity: phoneSensorEntityID("sensor", "ringer_mode"),
     name: "Ringer Mode",
-    show_background,
-    state_background,
-    show_icon: true,
-    show_state: false,
-    show_attribute: false,
     attribute: "options",
-    show_name: false,
   });
-  const RINGER_MODE_IDX = sub_button.length - 1;
-  sub_button.push({
-    entity: `sensor.${phone_sensor_prefix}_phone_state`,
+
+  // Phone State
+  const PHONE_STATE_IDX = addSubButton({
+    ...COMMON,
+    entity: phoneSensorEntityID("sensor", "phone_state"),
     name: "Phone State",
-    show_background,
-    state_background,
-    show_icon: true,
-    show_state: false,
-    state_background: false,
+    state_background: false, // override
     visibility: [
       {
         condition: "state",
-        entity: `sensor.${phone_sensor_prefix}_phone_state`,
+        entity: phoneSensorEntityID("sensor", "phone_state"),
         state_not: "idle",
       },
     ],
   });
-  const PHONE_STATE_IDX = sub_button.length - 1;
-  sub_button.push({
-    entity: `binary_sensor.${phone_sensor_prefix}_android_auto`,
+
+  // Android Auto
+  const ANDROID_AUTO_IDX = addSubButton({
+    ...COMMON,
+    entity: phoneSensorEntityID("binary_sensor", "android_auto"),
     name: "Android Auto",
-    show_background,
-    state_background,
-    show_icon: true,
-    show_state: false,
     visibility: [
       {
         condition: "state",
-        entity: `binary_sensor.${phone_sensor_prefix}_android_auto`,
+        entity: phoneSensorEntityID("binary_sensor", "android_auto"),
         state_not: "off",
       },
     ],
   });
-  const ANDROID_AUTO_IDX = sub_button.length - 1;
-  sub_button.push({
-    entity: `binary_sensor.${phone_sensor_prefix}_bluetooth_state`,
-    name: "Bluetooth State",
-    show_background,
-    state_background,
-    show_icon: true,
-    show_state: false,
-  });
-  const BT_IDX = sub_button.length - 1;
 
-  sub_button.push({
+  // Bluetooth State
+  const BT_IDX = addSubButton({
+    ...COMMON,
+    entity: phoneSensorEntityID("binary_sensor", "bluetooth_state"),
+    name: "Bluetooth State",
+  });
+
+  // BLE (optional)
+  const BLE_IDX = addSubButton({
+    ...COMMON,
     entity: ble_sensor,
     name: "BLE",
-    show_background,
-    state_background,
-    show_icon: true,
-    show_state: false,
     show_name: true,
     visibility: [
       helpers.visibilityNotUnknownUnavailable(ble_sensor),
@@ -519,24 +520,20 @@ function phoneCard(person, entities) {
       },
     ],
   });
-  const BLE_IDX = sub_button.length - 1;
 
-  sub_button.push({
-    entity: `sensor.${phone_sensor_prefix}_battery_level`,
+  // Battery Level
+  const BATTERY_IDX = addSubButton({
+    ...COMMON,
+    entity: phoneSensorEntityID("sensor", "battery_level"),
     name: "Battery Level",
-    show_background,
-    state_background,
-    show_icon: true,
     show_state: true,
   });
-  const BATTERY_IDX = sub_button.length - 1;
 
-  sub_button.push({
+  // Remaining Charge Time (optional)
+  const CHARGE_TIME_IDX = addSubButton({
+    ...COMMON,
     entity: remaining_charge_time_sensor,
     name: "Remaining Charge Time",
-    show_background,
-    state_background,
-    show_icon: true,
     show_state: true,
     visibility: [
       helpers.visibilityNotUnknownUnavailable(remaining_charge_time_sensor),
@@ -547,31 +544,27 @@ function phoneCard(person, entities) {
       },
     ],
   });
-  const CHARGE_TIME_IDX = sub_button.length - 1;
 
-  sub_button.push({
+  // Next Alarm (optional)
+  const NEXT_ALARM_IDX = addSubButton(
+    {
+      ...COMMON,
+      entity: alarm_sensor,
+      name: "Next Alarm",
+      show_name: true,
+      visibility: [helpers.visibilityNotUnknownUnavailable(alarm_sensor)],
+    },
+    { requireEntity: true }
+  );
+
+  // Next Alarm (Hours) — keeping your duplicate intentionally for separate usage later
+  const NEXT_ALARM_HOURS_IDX = addSubButton({
+    ...COMMON,
     entity: alarm_sensor,
     name: "Next Alarm",
-    show_background,
-    state_background,
-    show_icon: true,
-    show_state: false,
     show_name: true,
     visibility: [helpers.visibilityNotUnknownUnavailable(alarm_sensor)],
   });
-  const NEXT_ALARM_IDX = sub_button.length - 1;
-
-  sub_button.push({
-    entity: alarm_sensor,
-    name: "Next Alarm",
-    show_background,
-    state_background,
-    show_icon: true,
-    show_state: false,
-    show_name: true,
-    visibility: [helpers.visibilityNotUnknownUnavailable(alarm_sensor)],
-  });
-  const NEXT_ALARM_HOURS_IDX = sub_button.length - 1;
 
   // sub_button.push({
   //   entity: alarm_sensor,
@@ -588,38 +581,30 @@ function phoneCard(person, entities) {
   // const NEXT_ALARM_PKG_IDX = sub_button.length - 1;
 
   // Add steps sensor
-  sub_button.push({
+  const STEPS_IDX = addSubButton({
+    ...COMMON,
     entity: steps_sensor,
     name: "Daily Steps",
-    show_background,
-    state_background,
-    show_icon: true,
-    show_state: true,
-    show_attribute: false,
     show_name: false,
   });
-  const STEPS_IDX = sub_button.length - 1;
 
   // Get everything that is "labelled" with the person. I link to consider this as "tagging".
   // This allows us to display entities that aren't directly linked to the person / tracker
-  const labelled = Object.values(entities).filter((x) => {
-    return (
-      x !== undefined &&
-      x.labels !== undefined &&
-      x.labels.includes(person.entity_id.split(".")[1])
-    );
-  });
+  // Helper to check if an entity is labelled with the person
+  const personLabel = person.entity_id.split(".")[1];
 
-  labelled.forEach((entity) => {
-    sub_button.push({
-      entity: entity.entity_id,
-      name: entity.attributes.friendly_name,
-      show_background,
-      state_background,
-      show_icon: true,
-      show_state: true,
-      show_attribute: false,
-      show_name: false,
+  const isLabelledWithPerson = (ent) => ent?.labels?.includes(personLabel);
+
+  // Collect all entities that are labelled with this person
+  const labelled = Object.values(entities).filter(isLabelledWithPerson);
+
+  // Add sub-buttons for each labelled entity
+  labelled.forEach((ent) => {
+    addSubButton({
+      ...COMMON,
+      entity: ent.entity_id,
+      name: ent.attributes?.friendly_name ?? ent.entity_id,
+      show_state: true, // override the COMMON default
     });
   });
 
@@ -773,7 +758,7 @@ function phoneCard(person, entities) {
     show_icon: false,
     show_state: false,
     show_name: false,
-    sub_button,
+    sub_button: sub_button,
     card_layout: "large",
     styles,
     modules: [...helpers.BUBBLE_MODULES, "bubble_chips"],
