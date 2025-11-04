@@ -175,14 +175,14 @@ class Dashboard {
     );
 
     // --- Optional debug gate (flip to true when you want logs)
-    const DEBUG = false;
-    if (DEBUG) {
+    if (config.debug) {
       console.log("floors", floors);
       console.log("areas", areas);
       console.log("devices", devices);
       console.log("entities", entities);
       console.log("hass.states", hass.states);
       console.log("mergedEntityMetadata", mergedEntityMetadata);
+      console.log("Config area hide list:", config?.areas?.hide || []);
     }
 
     // Comparator for areas by floor level then name
@@ -213,15 +213,18 @@ class Dashboard {
     });
 
     // Area views (filter, sort, map)
-    const area_views = (areas || []).sort(areaComparator).map((area) =>
-      makeStrategyView({
-        type: "custom:magic-area",
-        options: { area, devices, entities, mergedEntityMetadata },
-        title: area.name,
-        path: area.area_id,
-        icon: area.icon || undefined,
-      })
-    );
+    const area_views = (areas || [])
+      .filter((area) => !(config?.areas?.hide || []).includes(area.area_id))
+      .sort(areaComparator)
+      .map((area) =>
+        makeStrategyView({
+          type: "custom:magic-area",
+          options: { area, devices, entities, mergedEntityMetadata },
+          title: area.name,
+          path: area.area_id,
+          icon: area.icon || undefined,
+        })
+      );
 
     // Weather view
     const weather_entity_id = "weather.home";
