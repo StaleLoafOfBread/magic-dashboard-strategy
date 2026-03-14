@@ -25,7 +25,7 @@ export function filterEntitiesToMagicArea(devices, entities, area_id) {
     .filter((device) => device.model === "Magic Area")
     .map((device) => device.id);
   return entities.filter((entity) =>
-    magic_area_device_ids.includes(entity.device_id)
+    magic_area_device_ids.includes(entity.device_id),
   );
 }
 
@@ -82,7 +82,7 @@ function convertEntitiesToArray(entities) {
  */
 export function filterEntityByArea(entities, areaId, includeHidden = false) {
   let entityArray = convertEntitiesToArray(entities).filter(
-    (entity) => entity.area_id === areaId
+    (entity) => entity.area_id === areaId,
   );
 
   return includeHidden ? entityArray : remove_hidden(entityArray);
@@ -399,6 +399,68 @@ export function remove_hidden(entities) {
   return entities.filter(
     (x) =>
       !(x.hasOwnProperty("hidden_by") && x.hidden_by !== null) &&
-      !(x.hasOwnProperty("disabled_by") && x.disabled_by !== null)
+      !(x.hasOwnProperty("disabled_by") && x.disabled_by !== null),
   );
+}
+
+export function floorIconForLevel(level) {
+  if (level === -1) return "mdi:home-floor-negative-1";
+  if (level >= 0 && level <= 3) return `mdi:home-floor-${level}`;
+  return "mdi:home";
+}
+
+export function NavBar(floors, areas) {
+  console.log("Building NavBar with floors:", floors, "and areas:", areas);
+  const path = window.location.pathname;
+  const dashboardBase = "/" + path.split("/").filter(Boolean)[0];
+
+  return {
+    type: "custom:navbar-card",
+    routes: [
+      {
+        url: `${dashboardBase}/home`,
+        icon: "mdi:home",
+        // label: "Home",
+        label: "",
+      },
+
+      ...floors.map((floor) => {
+        const floorAreas = areas
+          .filter((a) => a.floor_id === floor.floor_id)
+
+          // Sort in reverse alphabetical order
+          .sort((b, a) =>
+            (a?.name ?? "").localeCompare(b?.name ?? "", undefined, {
+              sensitivity: "base",
+            }),
+          )
+
+          .map((area) => {
+            return {
+              url: `${dashboardBase}/${area.area_id}`,
+              icon: area.icon || "mdi:home-group",
+              label: area.name,
+              badge: {},
+              icon_color: null,
+            };
+          });
+
+        return {
+          // label: floor.name,
+          icon: floor.icon || floorIconForLevel(floor.level),
+          tap_action: { action: "open-popup" },
+          popup: floorAreas,
+        };
+      }),
+    ],
+    layout: {
+      reflect_child_state: true,
+    },
+    desktop: {
+      show_labels: true,
+    },
+    mobile: {
+      show_labels: true,
+    },
+  };
 }

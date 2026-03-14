@@ -1,4 +1,5 @@
 import * as helpers from "./views/helpers";
+import "./views/home"; // just needs to be imported so customElements.define runs
 
 /* =========================
  * Utilities / small helpers
@@ -102,7 +103,7 @@ function mergeHomeAssistantData(areas, devices, entities, states) {
     const merged = mergeSkipNull(
       { ...deviceMeta, domain: domainOf(entityId) },
       entity,
-      state
+      state,
     );
 
     // Store the merged result under this entity_id in the global mergedData dictionary
@@ -121,11 +122,19 @@ function mergeHomeAssistantData(areas, devices, entities, states) {
 /* =========================
  * View helpers
  * ========================= */
-const makeStrategyView = ({ type, options, title, path, icon }) => ({
+const makeStrategyView = ({
+  type,
+  options,
+  title,
+  path,
+  icon,
+  subview = false,
+}) => ({
   strategy: { type, options },
   title,
   path,
   icon,
+  subview,
 });
 
 function getValidWeatherIcon(icon) {
@@ -160,9 +169,12 @@ function getValidWeatherIcon(icon) {
 class Dashboard {
   static async generate(config, hass) {
     // Fetch registries in parallel
+    const hidden = new Set(config?.areas?.hide ?? []);
     const [floors, areas, devices, entities] = await Promise.all([
       hass.callWS({ type: "config/floor_registry/list" }),
-      hass.callWS({ type: "config/area_registry/list" }),
+      hass
+        .callWS({ type: "config/area_registry/list" })
+        .then((areas) => areas.filter((area) => !hidden.has(area.area_id))),
       hass.callWS({ type: "config/device_registry/list" }),
       hass.callWS({ type: "config/entity_registry/list" }),
     ]);
@@ -171,10 +183,10 @@ class Dashboard {
       areas,
       devices,
       entities,
-      hass.states
+      hass.states,
     );
 
-    // --- Optional debug gate (flip to true when you want logs)
+    // Log debug info if enabled
     if (config.debug) {
       console.log("floors", floors);
       console.log("areas", areas);
@@ -193,6 +205,18 @@ class Dashboard {
       if (levelA !== levelB) return levelA - levelB;
       return a.name.localeCompare(b.name);
     };
+
+    // Home view
+    const home_view = makeStrategyView({
+      type: "custom:magic-home",
+      options: {
+        areas,
+        hide_areas: config?.areas?.hide || [],
+      },
+      title: "Home",
+      path: "home",
+      icon: "mdi:home",
+    });
 
     // Temperature view
     const temperature_view = makeStrategyView({
@@ -219,11 +243,19 @@ class Dashboard {
       .map((area) =>
         makeStrategyView({
           type: "custom:magic-area",
-          options: { area, devices, entities, mergedEntityMetadata },
+          options: {
+            area,
+            devices,
+            entities,
+            mergedEntityMetadata,
+            areas,
+            floors,
+          },
           title: area.name,
           path: area.area_id,
           icon: area.icon || undefined,
-        })
+          subview: true,
+        }),
       );
 
     // Weather view
@@ -247,7 +279,13 @@ class Dashboard {
       icon: "mdi:alert-decagram",
     };
 
-    const views = [...area_views, people_view, weather_view, temperature_view];
+    const views = [
+      home_view,
+      ...area_views,
+      people_view,
+      weather_view,
+      temperature_view,
+    ];
     if (hass.user?.is_admin) views.push(error_view);
 
     return { views };
@@ -255,7 +293,7 @@ class Dashboard {
 }
 
 /* =========================
- * Error view (DRY section factory)
+ * Error view
  * ========================= */
 class ErrorView {
   static async generate(config, hass) {
@@ -409,5 +447,5 @@ customElements.define("ll-strategy-view-magic-error", ErrorView);
 
 customElements.define(
   "ll-strategy-dashboard-magic-dashboard-strategy",
-  Dashboard
+  Dashboard,
 );

@@ -2,12 +2,13 @@ import * as helpers from "./helpers.js";
 
 class AreaView {
   static async generate(config, hass) {
-    const { area, devices, entities, mergedEntityMetadata } = config;
+    const { area, devices, entities, mergedEntityMetadata, areas, floors } =
+      config;
 
     // Extract the entities for this area
     const thisAreasEntities = helpers.filterEntityByArea(
       mergedEntityMetadata,
-      area.area_id
+      area.area_id,
     );
 
     const max_columns = 4;
@@ -28,9 +29,10 @@ class AreaView {
         [
           newViewHeader(hass, devices, entities, area, thisAreasEntities),
           AreaStatePopUp(area, magic_areas_state_sensor),
+          helpers.NavBar(floors, areas),
         ],
-        max_columns
-      )
+        max_columns,
+      ),
     );
 
     // Add the light grid
@@ -110,7 +112,7 @@ function fanGrid(area, mergedEntityMetadata) {
 
   // Get all the fans for this area
   const fans = Object.values(
-    helpers.filterEntityKeysByDomain(mergedEntityMetadata, "fan")
+    helpers.filterEntityKeysByDomain(mergedEntityMetadata, "fan"),
   ).filter((x) => x.area_id === area.area_id);
 
   // If we don't have fans then return null
@@ -501,13 +503,13 @@ function newMotionControlsIconsOnly(area, thisAreasEntities) {
     (x) =>
       x.domain === "switch" &&
       x.identifiers?.[0]?.[0] === "magic_areas" &&
-      x.original_name == "Light Control" // TODO: Find a better way to do this as it might change but without this it will get the presence hold instead
+      x.original_name == "Light Control", // TODO: Find a better way to do this as it might change but without this it will get the presence hold instead
   )?.entity_id;
 
   function subbutton(
     entityID,
     mainAdaptiveEntityId = undefined,
-    dictToMerge = {}
+    dictToMerge = {},
   ) {
     let visibility = [];
     if (mainAdaptiveEntityId !== undefined) {
@@ -562,7 +564,7 @@ function newMotionControlsIconsOnly(area, thisAreasEntities) {
   }
   if (valid_entity_ids.includes(presenceHold)) {
     sub_buttons.push(
-      subbutton(presenceHold, undefined, presenceHoldVisibility)
+      subbutton(presenceHold, undefined, presenceHoldVisibility),
     );
   }
 
@@ -658,7 +660,7 @@ function newAdaptiveControlsIconsOnly(area, thisAreasEntities) {
 function newBubbleIconButtons(
   sub_buttons,
   styles = "",
-  column_override = undefined
+  column_override = undefined,
 ) {
   //TODO: there has to be a pure CSS way instead of setting justify and margin programmatically
   const icon_px = 46;
@@ -892,16 +894,16 @@ function litterbotCards(entities) {
 
     // TODO: make this not based on entity_id since that can be changed by the user
     const litter_level = related_entities.filter((e) =>
-      e.entity_id.endsWith("_litter_level")
+      e.entity_id.endsWith("_litter_level"),
     )[0];
     const waste_drawer = related_entities.filter((e) =>
-      e.entity_id.endsWith("_waste_drawer")
+      e.entity_id.endsWith("_waste_drawer"),
     )[0];
     const status_code = related_entities.filter((e) =>
-      e.entity_id.endsWith("_status_code")
+      e.entity_id.endsWith("_status_code"),
     )[0];
     const pet_weight = related_entities.filter((e) =>
-      e.entity_id.endsWith("_pet_weight")
+      e.entity_id.endsWith("_pet_weight"),
     )[0];
 
     // Update the icon to have a cat in it if its in Cat Sensor Timing
@@ -1096,15 +1098,15 @@ function vacuumCards(entities) {
     };
 
     const battery_entity = related_entities.filter(
-      (e) => e.attributes?.device_class === "battery"
+      (e) => e.attributes?.device_class === "battery",
     )[0];
 
     const status_code = related_entities.filter(
-      (e) => e.translation_key === "status" // TODO: Check other vacuum integrations and ensure this works for more than just roborock
+      (e) => e.translation_key === "status", // TODO: Check other vacuum integrations and ensure this works for more than just roborock
     )[0];
 
     const error_sensors = related_entities.filter(
-      (e) => e.entity_id.endsWith("_error") // TODO: Check other vacuum integrations and ensure this works for more than just roborock
+      (e) => e.entity_id.endsWith("_error"), // TODO: Check other vacuum integrations and ensure this works for more than just roborock
     );
 
     const error_buttons = error_sensors.map((e) => ({
@@ -1165,7 +1167,7 @@ function vacuumCards(entities) {
 
     const progress_button = {
       entity: related_entities.filter(
-        (e) => e.original_name === "Cleaning progress"
+        (e) => e.original_name === "Cleaning progress",
       )[0].entity_id, // TODO: don't assume the entity exists. Find a more universal way to identify
       show_attribute: true,
       show_state: true,
@@ -1326,7 +1328,7 @@ function vacuumCards(entities) {
     const styles = helpers.wrapInBubbleCardStyleIIFE(
       animation,
       show_docked_if_fully_charged,
-      error_glow_whole_card
+      error_glow_whole_card,
     );
 
     cards.push({
@@ -1511,7 +1513,7 @@ function AutomationGrid(entities) {
 
   // Create a card for each automation
   const cards = automations.map((automation) =>
-    new_bubble_card_automation(automation)
+    new_bubble_card_automation(automation),
   );
 
   // Return null if we have no cards
@@ -1543,7 +1545,7 @@ function DailyLogCard(
   history,
   hidden_state,
   date_format,
-  minimal_duration
+  minimal_duration,
 ) {
   const config = {
     type: "custom:logbook-card",
@@ -1662,11 +1664,11 @@ function AreaStatePopUp(area, area_state_entity) {
         1,
         ["unavailable", "off"],
         "hh:mm A",
-        1
+        1,
       ),
       multi_log_card(
         [...area_state_entity.attributes.presence_sensors],
-        area_state_entity.entity_id
+        area_state_entity.entity_id,
       ),
     ],
   };
@@ -1680,7 +1682,7 @@ function temperatureCard(mergedEntityMetadata, area) {
       translation_key: "aggregate_temperature",
       platform: "magic_areas",
       area_id: area.area_id,
-    }
+    },
   )[0];
 
   if (area_temperature_entity === undefined) {
@@ -1761,7 +1763,9 @@ function temperatureCard(mergedEntityMetadata, area) {
       rows: 1,
     },
     styles: helpers.wrapInBubbleCardStyleIIFE(
-      helpers.bubbleStyleConditional2Row(`window.innerWidth <= ${helpers.WIDE}`)
+      helpers.bubbleStyleConditional2Row(
+        `window.innerWidth <= ${helpers.WIDE}`,
+      ),
     ),
   };
 }
@@ -1831,7 +1835,9 @@ function humidityCard(mergedEntityMetadata, area) {
       rows: 1,
     },
     styles: helpers.wrapInBubbleCardStyleIIFE(
-      helpers.bubbleStyleConditional2Row(`window.innerWidth <= ${helpers.WIDE}`)
+      helpers.bubbleStyleConditional2Row(
+        `window.innerWidth <= ${helpers.WIDE}`,
+      ),
     ),
   };
 }
@@ -1888,7 +1894,9 @@ function carbonDioxideCard(mergedEntityMetadata, area) {
       rows: 1,
     },
     styles: helpers.wrapInBubbleCardStyleIIFE(
-      helpers.bubbleStyleConditional2Row(`window.innerWidth <= ${helpers.WIDE}`)
+      helpers.bubbleStyleConditional2Row(
+        `window.innerWidth <= ${helpers.WIDE}`,
+      ),
     ),
   };
 }
@@ -1910,7 +1918,7 @@ function climate_control_grid(mergedEntityMetadata, area) {
     {
       domain: "climate",
       area_id: area.area_id,
-    }
+    },
   );
 
   // Get all entities tagged with "climate"
@@ -1924,8 +1932,8 @@ function climate_control_grid(mergedEntityMetadata, area) {
   const combined_climate_entities = helpers.remove_hidden(
     [...climate_entities, ...climate_entities_tagged].filter(
       (entity, index, self) =>
-        index === self.findIndex((e) => e.entity_id === entity.entity_id)
-    )
+        index === self.findIndex((e) => e.entity_id === entity.entity_id),
+    ),
   );
 
   // Create a card for each unique climate entity
