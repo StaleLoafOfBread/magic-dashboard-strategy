@@ -59,6 +59,9 @@ class AreaView {
     // Scripts Grid
     sections.push(ScriptGrid(thisAreasEntities));
 
+    // Other Grid
+    sections.push(otherGrid(thisAreasEntities, max_columns));
+
     // Add card mod
     helpers.AddCardMod(sections);
 
@@ -69,6 +72,13 @@ class AreaView {
       badges: [helpers.alertBadge()],
       sections: sections.filter((section) => section !== null),
     };
+  }
+}
+
+const usedEntities = new Set();
+function trackEntity(entity_id) {
+  if (entity_id) {
+    usedEntities.add(entity_id);
   }
 }
 
@@ -84,6 +94,8 @@ function fanGrid(area, mergedEntityMetadata) {
       // Ensure it doesn't exceed the max of 4
       return Math.min(columns, 4);
     }
+
+    trackEntity(entity.entity_id);
 
     return {
       type: "custom:bubble-card",
@@ -154,10 +166,10 @@ function lightGrid(area, thisAreasEntities) {
   // Add adaptive lighting controls
   // cards.push(newAdaptiveControls(area));
   cards.push(newAdaptiveControlsIconsOnly(area, thisAreasEntities));
-  const motionControls = newMotionControlsIconsOnly(area, thisAreasEntities);
-  if (motionControls) {
-    cards.push(spacer(1.25), motionControls);
-  }
+  // const motionControls = newMotionControlsIconsOnly(area, thisAreasEntities);
+  // if (motionControls) {
+  //   cards.push(spacer(1.25), motionControls);
+  // }
 
   // Add the header
   cards.unshift(sectionHeader("mdi:lightbulb", "Lights"));
@@ -172,6 +184,7 @@ function newViewHeader(hass, devices, entities, area, thisAreasEntities) {
 
   // Add vacuum icon if its in the room
   const vacuum_entity = "sensor.rosey_the_robot_current_room"; // TODO: dont hard code
+  trackEntity(vacuum_entity);
   subButtons.push({
     entity: vacuum_entity,
     icon: "mdi:robot-vacuum",
@@ -268,6 +281,7 @@ function newViewHeader(hass, devices, entities, area, thisAreasEntities) {
     .filter((entity) => entity.attributes && entity.attributes.type)[0]; // Filter to just the "magic area state" entity as to remove others such as the "aggregate_occupancy" sensor but don't rely on entity id
 
   if (magic_areas_state_sensor) {
+    trackEntity(magic_areas_state_sensor.entity_id);
     subButtons.push({
       entity: magic_areas_state_sensor.entity_id,
       name: "Magic Areas State",
@@ -409,6 +423,7 @@ function newLightBubble(entity_id, adaptive_entity, show_name) {
     // + helpers.wrapInBubbleCardStyleIIFE(
     //   `if (card.classList.contains('is-on')) {icon.classList.add('breathing-glow')} else {icon.classList.remove('breathing-glow')}`
     // )
+    trackEntity(adaptive_entity.entity_id);
     subbutton1 = {
       show_attribute: true,
       show_last_changed: false,
@@ -444,6 +459,7 @@ function newLightBubble(entity_id, adaptive_entity, show_name) {
     icon: "mdi:menu",
   };
 
+  trackEntity(entity_id);
   return {
     type: "custom:bubble-card",
     card_layout: "large",
@@ -488,6 +504,7 @@ function newLights(thisAreasEntities) {
 
   console.log(adaptive_entity);
   const cards = lights.map((light) => {
+    trackEntity(light.entity_id);
     return newLightBubble(light.entity_id, adaptive_entity, lights.length > 1);
   });
   return cards;
@@ -511,8 +528,10 @@ function newMotionControlsIconsOnly(area, thisAreasEntities) {
     mainAdaptiveEntityId = undefined,
     dictToMerge = {},
   ) {
+    trackEntity(entityID);
     let visibility = [];
     if (mainAdaptiveEntityId !== undefined) {
+      trackEntity(mainAdaptiveEntityId);
       visibility.push({
         condition: "state",
         entity: mainAdaptiveEntityId,
@@ -590,6 +609,10 @@ function newAdaptiveControlsIconsOnly(area, thisAreasEntities) {
   const autoBrightness = `switch.adaptive_lighting_adapt_brightness_${area.area_id}`;
   const autoColor = `switch.adaptive_lighting_adapt_color_${area.area_id}`;
   const sleepMode = `switch.adaptive_lighting_sleep_mode_${area.area_id}`;
+  trackEntity(adaptive);
+  trackEntity(autoBrightness);
+  trackEntity(autoColor);
+  trackEntity(sleepMode);
 
   function subbutton(entityID, mainAdaptiveEntityId) {
     let visibility = [];
@@ -810,7 +833,8 @@ function newAreaTemperatureGraph(area, thisAreasEntities) {
   // Todo: remove hard coding and don't rely on entity id naming scheme
   const room = `sensor.magic_areas_aggregates_${area.area_id}_aggregate_temperature`;
   const home = "sensor.magic_areas_aggregates_interior_aggregate_temperature";
-  const outdoor = "sensor.outdoor_temperature";
+  trackEntity(room);
+  trackEntity(home);
 
   // Return null if we don't have a room temperature as the whole point is to show the temperature of this room
   const valid_entity_ids = thisAreasEntities.map((entity) => entity.entity_id);
@@ -888,6 +912,7 @@ function litterbotCards(entities) {
 
   // Iterate over each litter robot and generate a card for it
   litterrobots.forEach((litterrobot) => {
+    trackEntity(litterrobot.entity_id);
     const related_entities = helpers.filterEntitiesByProperties(entities, {
       device_id: litterrobot.device_id,
     });
@@ -905,6 +930,10 @@ function litterbotCards(entities) {
     const pet_weight = related_entities.filter((e) =>
       e.entity_id.endsWith("_pet_weight"),
     )[0];
+    trackEntity(litter_level.entity_id);
+    trackEntity(waste_drawer.entity_id);
+    trackEntity(status_code.entity_id);
+    trackEntity(pet_weight.entity_id);
 
     // Update the icon to have a cat in it if its in Cat Sensor Timing
     let styles = `\${icon.setAttribute("icon", ['cst', 'cd'].includes(hass.states['${status_code.entity_id}'].state) ? 'phu:litter-robot' : 'phu:litter-robot-empty')}`; // TODO: fall back to mdi icons if window.customIcons.phu does not exist. Or better yet, find a WebSocket call or something to check for installed HACs resources but if we go that way, ensure manual installs still work
@@ -1075,10 +1104,11 @@ function vacuumCards(entities) {
 
   // Iterate over each vacuum and create a card for it
   vacuums.forEach((vacuum) => {
+    trackEntity(vacuum.entity_id);
     const related_entities = helpers.filterEntitiesByProperties(entities, {
       device_id: vacuum.device_id,
     });
-
+    related_entities.forEach((sensor) => trackEntity(sensor.entity_id));
     console.log(related_entities);
 
     const visibility_is_moving = {
@@ -1375,6 +1405,8 @@ function vacuumCards(entities) {
 }
 
 function new_bubble_card_automation(entity) {
+  trackEntity(entity.entity_id);
+
   const toggle = {
     action: "toggle",
     confirmation: {
@@ -1498,6 +1530,30 @@ function ScriptGrid(entities) {
 
   // Create grid to store the cards in
   return helpers.newGrid(cards);
+}
+
+function otherGrid(entities, max_columns) {
+  const unusedEntities = entities.filter(
+    (entity) => !usedEntities.has(entity.entity_id),
+  );
+
+  const cards = unusedEntities.map((entity) => {
+    trackEntity(entity.entity_id);
+    return new_generic_bubble_card(entity);
+  });
+
+  // Return null if we have no cards
+  if (cards.length === 0) {
+    return null;
+  }
+
+  // Add the header and force full-width explicitly
+  const headerCard = sectionHeader("mdi:help", "Other");
+  headerCard.grid_options = { columns: "full" };
+  cards.unshift(headerCard);
+
+  // Create grid to store the cards in
+  return helpers.newGrid(cards, max_columns);
 }
 
 function AutomationGrid(entities) {
@@ -2008,6 +2064,7 @@ function new_bubble_card(entity) {
   if (entity === undefined) {
     return null;
   }
+  trackEntity(entity.entity_id);
 
   if (entity.domain == "climate") {
     return new_bubble_climate_card(entity.entity_id);
