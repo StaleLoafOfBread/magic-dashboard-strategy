@@ -87,6 +87,7 @@ function createRoomSummaryCard(areaId) {
       "multi_light_background",
       "hide_hidden_entities",
       "skip_climate_styles",
+      "hide_area_stats",
     ],
     smoke: { entities: [null] },
     gas: { entities: [null] },
