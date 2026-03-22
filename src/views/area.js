@@ -1533,12 +1533,17 @@ function ScriptGrid(entities) {
 }
 
 function otherGrid(entities, max_columns) {
-  const unusedEntities = entities.filter(
-    (entity) => !usedEntities.has(entity.entity_id),
-  );
+  const invalidIds = new Set(["unknown", "none", "undefined", "null", ""]);
+  const unusedEntities = entities.filter((entity) => {
+    const rawId = entity?.entity_id;
+    const id = rawId?.toString().trim().toLowerCase();
+
+    return id && !invalidIds.has(id) && !usedEntities.has(rawId);
+  });
 
   const cards = unusedEntities.map((entity) => {
     trackEntity(entity.entity_id);
+    console.log("Unused Entity:", entity.entity_id);
     return new_generic_bubble_card(entity);
   });
 
@@ -1546,11 +1551,10 @@ function otherGrid(entities, max_columns) {
   if (cards.length === 0) {
     return null;
   }
+  console.log("Number of Other Cards:", cards.length);
 
-  // Add the header and force full-width explicitly
-  const headerCard = sectionHeader("mdi:help", "Other");
-  headerCard.grid_options = { columns: "full" };
-  cards.unshift(headerCard);
+  // Add the header
+  cards.unshift(sectionHeader("mdi:help", "Other"));
 
   // Create grid to store the cards in
   return helpers.newGrid(cards, max_columns);
@@ -1593,6 +1597,7 @@ function sectionHeader(icon, name, styles = undefined) {
     icon,
     card_layout: "normal",
     styles,
+    grid_options: { columns: "full" },
   };
 }
 
